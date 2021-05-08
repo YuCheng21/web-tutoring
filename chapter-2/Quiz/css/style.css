@@ -1,0 +1,62 @@
+@font-face {
+  font-family: "jf-openhuninn-1.1";
+  src: url("jf-openhuninn-11.woff2") format('woff2'), url("jf-openhuninn-11.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+* {
+  font-family: "jf-openhuninn-1.1", "Nunito", "Noto Sans TC", sans-serif;
+}
+.jumbotron {
+  background-image: url("../static/bg.png");
+  color: #fff;
+}
+.jumbotron p {
+  font-size: 30px;
+}
+.navbar-demo {
+  background-color: #f5a5a5 !important;
+  opacity: 0.9;
+  box-shadow: 0 0 8px 0 #000;
+}
+.navbar-demo a {
+  color: #fff;
+}
+.navbar-demo a:hover {
+  color: #ffebad;
+}
+.navbar-nav {
+  font-size: 20px;
+  color: #fff;
+}
+.card {
+  margin-bottom: 20px;
+}
+.card .card-header {
+  background-color: #ffebad !important;
+}
+.card .formula {
+  font-size: 20px;
+}
+.font-style {
+  text-shadow: 2px 2px 2px #000;
+  color: #fff;
+}
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-track:hover {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1a900;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dc3545;
+}

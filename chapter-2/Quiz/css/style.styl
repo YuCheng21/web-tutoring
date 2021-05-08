@@ -1,0 +1,62 @@
+main-color = #FFEBAD
+second-color = #F5A5A5
+
+@font-face
+  font-family: "jf-openhuninn-1.1";
+  src: url('jf-openhuninn-11.woff2') format('woff2'),
+          url('jf-openhuninn-11.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+
+
+*
+    font-family "jf-openhuninn-1.1","Nunito","Noto Sans TC",sans-serif
+
+.jumbotron
+    background-image: url("../static/bg.png")
+    color: white
+    p
+        font-size: 30px
+
+.navbar-demo
+  background-color: second-color !important
+  opacity 0.9
+  box-shadow: 0 0 8px 0 #000;
+  a
+    color: white
+  a:hover
+    color: main-color
+
+.navbar-nav
+    font-size: 20px
+    color: white
+
+.card
+    margin-bottom: 20px
+    .card-header
+        background-color: main-color !important
+    .formula
+        font-size: 20px
+
+.font-style
+    text-shadow: 2px 2px 2px black
+    color: white
+
+
+&::-webkit-scrollbar
+  width: 16px
+  height: 16px
+
+&::-webkit-scrollbar-track
+  background-color: transparent
+
+&::-webkit-scrollbar-track:hover
+  background: transparent
+
+&::-webkit-scrollbar-thumb
+  background: #E1A900
+  border-radius: 8px
+
+&::-webkit-scrollbar-thumb:hover
+  background-color: #DC3545

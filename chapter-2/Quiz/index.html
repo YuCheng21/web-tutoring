@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Responsive Web Design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="76x76" href="static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="static/favicon/site.webmanifest">
+    <link rel="mask-icon" href="static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Page Title -->
+    <title>BMI 計算機</title>
+</head>
+<body>
+    <!-- Navigation Block -->
+    <nav class="navbar navbar-expand-md navbar-demo sticky-top" id="navbar">
+        <div class="container font-style">
+            <a href="./" class="navbar-brand h1"><i class="fas fa-calculator" style="margin-right: 5px;"></i><span>BMI 計算機</span></a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar-content">
+                <span>
+                    <i class="fas fa-bars"></i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-content">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="#formula" class="nav-link">計算公式</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#input-data" class="nav-link">輸入身高體重</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#result" class="nav-link">計算結果</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Full Screen Block -->
+    <div class="jumbotron jumbotron-fluid font-style">
+        <div class="container">
+            <h1>BMI 計算機</h1>
+            <p>BMI（Body Mass Index）身體質量指數，是體重（公斤）和身高平方（公尺）的比值，用來評估你現在的體重狀況。</p>
+            <p>BMI 是個初步篩檢工具，並無法完全反映一個人是否有肥胖或其他健康問題，實際健康狀況仍需考量許多因素，醫療專業人員可能會評估你的皮下脂肪厚度、飲食狀況、日常活動量或家族史等，再做進一步診斷。</p>
+        </div>
+    </div>
+    <!-- Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Formula -->
+            <div class="col-md-12">
+                <div class="card text-center">
+                    <h2 class="card-header" id="formula">計算公式</h5>
+                    <div class="card-body">
+                        <p class="card-text"><var class="formula">BMI = 體重（公斤）／身高（公尺）<sup>2</sup></var></p>
+                        <table class="table table-striped table-bordered table-hover" style="font-size: 20px">
+                            <tr>
+                                <th>成人肥胖定義</th>
+                                <th>BMI 身體質量指數 (kg/m<sup>2</sup>)</th>
+                                <th>腰圍 (cm)</th>
+                            </tr>
+                            <tr>
+                                <td>體重過輕</td>
+                                <td>BMI < 18.5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>健康體位</td>
+                                <td>18.5 <= BMI<24</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">體位異常</td>
+                                <td class=" ">
+                                    <p>過重：24 <= BMI < 27</p>
+                                    <p>輕度肥胖：27 <= BMI < 30</p>
+                                    <p>中度肥胖：30 <= BMI < 35</p>
+                                    <p>重度肥胖：BMI >= 35</p>
+                                </td>
+                                <td class="align-middle">
+                                    <p>男性：>= 90 公分</p>
+                                    <p>女性：>= 80 公分</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Calculator -->
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <h2 class="card-header" id="input-data">輸入身高體重</h2>
+                    <div class="card-body">
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text" id="hight-text">身高</span>
+                            <input type="number" class="form-control" id="height-value" placeholder="請輸入身高">
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text" id="weight-text">體重</span>
+                            <input type="number" class="form-control" id="weight-value" placeholder="請輸入體重">
+                        </div>
+                        <button type="button" class="btn btn-warning btn-lg mb-3" style="width: 100%;" id="submit">計算</button>
+                        <button type="button" class="btn btn-danger btn-lg mb-3" style="width: 100%;" id="reset">重置</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Result -->
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <h2 class="card-header" id="result">計算結果</h2>
+                    <div class="card-body">
+                        <h3 class="card-title">你的 BMI：</h3>
+                        <p class="card-text font-style" id="result-text" style="font-size: 30px;"></p>
+                        <p class="card-text" id="result-value" style="font-size: 30px;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer style="background-color: #FFEBAD">
+        <div class="text-center py-3">© 2020 Copyright:
+            <a href="./">BMI Calculator</a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
