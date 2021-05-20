@@ -56,7 +56,7 @@ session_start();
 header("Cache-Control: no cache");
 
 if(!isset($_SESSION['stu_id'])){
-  header("Location: home.php");
+  header("Location: index.php");
   exit();
 }
 $stu_id = $_SESSION['stu_id'];
@@ -109,7 +109,7 @@ echo <<<EOF
 
 if (isset($_POST['logout'])) {
     unset($_SESSION['stu_id']);
-    header("Location: home.php");
+    header("Location: index.php");
 }
 
 if (isset($_POST['search'])) {
@@ -215,7 +215,7 @@ echo <<<EOF
     <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true"
         data-delay="5000">
         <div class="toast-header">
-            <i class="fas fa-chevron-circle-left mr-1"></i>
+            <i class="fas fa-exclamation-circle mr-1"></i>
             <strong class="mr-auto">訊息</strong>
             <small>剛剛</small>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
