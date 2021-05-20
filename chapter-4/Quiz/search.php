@@ -10,51 +10,56 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
     <title>已選課程</title>
     <style>
-    body {
-        background-color: #99C7CB;
-    }
+      body {
+          background-color: #99C7CB;
+      }
 
-    .primary-color {
-        color: #4CAF50;
-    }
+      .primary-color {
+          color: #4CAF50;
+      }
 
-    .primary-bgcolor {
-        background-color: #4CAF50;
-    }
+      .primary-bgcolor {
+          background-color: #4CAF50;
+      }
 
-    .primary-bgcolor:hover {
-        background-color: #FF9800;
-    }
+      .primary-bgcolor:hover {
+          background-color: #FF9800;
+      }
 
-    .card {
-        border-radius: 10px;
-        box-shadow: 0 4px 15px 1px #444444;
-    }
+      .card {
+          border-radius: 10px;
+          box-shadow: 0 4px 15px 1px #444444;
+      }
 
-    .card:hover {
-        box-shadow: 0 4px 20px 2px #444444;
-    }
+      .card:hover {
+          box-shadow: 0 4px 20px 2px #444444;
+      }
 
-    .card-header {
-        border-radius: 10px !important;
-        background-color: #4CAF50;
-    }
+      .card-header {
+          border-radius: 10px !important;
+          background-color: #4CAF50;
+      }
 
-    li {
-        font-size: 20px;
-    }
+      li {
+          font-size: 20px;
+      }
 
-    .result_msg {
-        color: red;
-        font-size: 20px;
-        margin: 20px;
-    }
+      .result_msg {
+          color: red;
+          font-size: 20px;
+          margin: 20px;
+      }
     </style>
 </head>
 
 <body>
     <?php
 session_start();
+if(!isset($_SESSION['stu_id'])){
+  header("Location: home.php");
+  exit();
+}
+
 $stu_id = $_SESSION['stu_id'];
 $cls_name = $_SESSION['cls_name'];
 $cls_year = $_SESSION['cls_year'];

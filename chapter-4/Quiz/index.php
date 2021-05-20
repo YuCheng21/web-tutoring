@@ -10,55 +10,55 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
     <title>首頁</title>
     <style>
-    body {
-        background-image: url(https://cdn.jsdelivr.net/gh/YuCheng21/cdn-yucheng@master/blog/wallpaper/001.png);
-        background-size: cover;
-    }
+        body {
+            background-image: url(https://cdn.jsdelivr.net/gh/YuCheng21/cdn-yucheng@master/blog/wallpaper/001.png);
+            background-size: cover;
+        }
 
-    .primary-color {
-        color: #4CAF50;
-    }
+        .primary-color {
+            color: #4CAF50;
+        }
 
-    .primary-bgcolor {
-        background-color: #4CAF50;
-    }
+        .primary-bgcolor {
+            background-color: #4CAF50;
+        }
 
-    .primary-bgcolor:hover {
-        background-color: #FF9800;
-    }
+        .primary-bgcolor:hover {
+            background-color: #FF9800;
+        }
 
-    .fa-users {
-        margin: 50px;
-        color: #4CAF50;
-        text-shadow: 2px 2px 2px #000;
-    }
+        .fa-users {
+            margin: 50px;
+            color: #4CAF50;
+            text-shadow: 2px 2px 2px #000;
+        }
 
-    .input-group {
-        margin-top: 50px;
-    }
+        .input-group {
+            margin-top: 50px;
+        }
 
-    .card {
-        padding: 50px;
-        background-color: rgba(0, 0, 0, 0.4);
-        border-radius: 2%;
-        width: 500px;
-        margin: 1rem auto;
-    }
+        .card {
+            padding: 50px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 2%;
+            width: 500px;
+            margin: 1rem auto;
+        }
 
-    .card h1 {
-        color: white;
-        text-shadow: 2px 2px 2px #000;
-    }
+        .card h1 {
+            color: white;
+            text-shadow: 2px 2px 2px #000;
+        }
 
-    .result_msg {
-        color: red;
-        font-size: 20px;
-        margin: 20px;
-        text-shadow: 2px 2px 2px #000;
-    }
-    li{
-        color: white;
-    }
+        .result_msg {
+            color: red;
+            font-size: 20px;
+            margin: 20px;
+            text-shadow: 2px 2px 2px #000;
+        }
+        li{
+            color: white;
+        }
     </style>
 </head>
 

@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
   <title>操作介面</title>
   <style>
         body {
@@ -49,8 +51,14 @@
     </style>
 </head>
 <body>
-  <?php
+<?php
 session_start();
+header("Cache-Control: no cache");
+
+if(!isset($_SESSION['stu_id'])){
+  header("Location: home.php");
+  exit();
+}
 $stu_id = $_SESSION['stu_id'];
 
 require_once 'login.php';
@@ -100,7 +108,8 @@ echo <<<EOF
     EOF;
 
 if (isset($_POST['logout'])) {
-    header("Location: index.php");
+    unset($_SESSION['stu_id']);
+    header("Location: home.php");
 }
 
 if (isset($_POST['search'])) {
@@ -123,20 +132,34 @@ if (isset($_POST['add'])) {
     $course_id = $_POST["course_id"];
     $query = "INSERT INTO selection (stu_id, course_id) VALUES ($stu_id, $course_id)";
     if (!$conn->query($query)) {
-        echo "<span class='result_msg'>課程代碼錯誤或重複選課 !</span>";
+      $result_msg = "課程代碼錯誤或重複選課 !";
     } else {
-        echo "<span class='result_msg'>新增成功 !</span>";
+      $result_msg = "新增課程成功 !";
     }
+    echo <<<EOF
+      <script>
+        $(document).ready(function () {
+            $(".toast#liveToast").toast('show');
+        });
+      </script>
+    EOF;
 }
 
 if (isset($_POST['del'])) {
     $course_id = $_POST["course_id"];
     $query = "DELETE FROM selection WHERE stu_id = $stu_id AND course_id = $course_id";
     if (!$conn->query($query)) {
-        echo "<span class='result_msg'>課程代碼錯誤 !</span>";
+      $result_msg = "課程代碼錯誤 !";
     } else {
-        echo "<span class='result_msg'>刪除成功 !</span>";
+      $result_msg = "刪除課程成功 !";
     }
+    echo <<<EOF
+    <script>
+      $(document).ready(function () {
+          $(".toast#liveToast").toast('show');
+      });
+    </script>
+    EOF;
 }
 echo <<<_END
     <div class="card-body">
@@ -187,8 +210,24 @@ echo <<<_END
 
 $result->close();
 $conn->close();
+echo <<<EOF
+  <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true"
+        data-delay="5000">
+        <div class="toast-header">
+            <i class="fas fa-chevron-circle-left mr-1"></i>
+            <strong class="mr-auto">訊息</strong>
+            <small>剛剛</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body" style="width: 200px;">
+            $result_msg
+        </div>
+    </div>
+  </div>
+EOF;
 ?>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-</body>
+  </body>
 </html>
