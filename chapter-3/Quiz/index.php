@@ -45,7 +45,7 @@
     <?php
         if(isset($_POST['search-all'])){
             $hn = 'localhost';
-            $db = 'webtutoring';
+            $db = 'ch3';
             $un = 'root';
             $pw = 'mysql';
             $conn = new mysqli($hn, $un, $pw, $db);
@@ -79,7 +79,7 @@
         if (!empty($_POST['id']))
         {
             $hn = 'localhost';
-            $db = 'webtutoring';
+            $db = 'ch3';
             $un = 'root';
             $pw = 'mysql';
             $conn = new mysqli($hn, $un, $pw, $db);

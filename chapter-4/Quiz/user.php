@@ -53,13 +53,14 @@
 <body>
 <?php
 session_start();
-header("Cache-Control: no cache");
+// header("Cache-Control: no cache");
 
 if(!isset($_SESSION['stu_id'])){
   header("Location: index.php");
   exit();
 }
 $stu_id = $_SESSION['stu_id'];
+if(isset($_SESSION['msg'])) $msg = $_SESSION['msg'];
 
 require_once 'login.php';
 $conn = new mysqli($hn, $un, $pw, $db);
@@ -109,6 +110,7 @@ echo <<<EOF
 
 if (isset($_POST['logout'])) {
     unset($_SESSION['stu_id']);
+    unset($_SESSION['msg']);
     header("Location: index.php");
 }
 
@@ -118,6 +120,7 @@ if (isset($_POST['search'])) {
     $_SESSION['cls_name'] = $cls_name;
     $_SESSION['cls_year'] = $cls_year;
     $_SESSION['stu_name'] = $stu_name;
+    unset($_SESSION['msg']);
     header("Location: search.php");
 }
 
@@ -128,64 +131,82 @@ echo <<<_END
     </div>
     _END;
 
-if (isset($_POST['add'])) {
-    $course_id = $_POST["course_id"];
-    $query = "INSERT INTO selection (stu_id, course_id) VALUES ($stu_id, $course_id)";
-    if (!$conn->query($query)) {
-      $result_msg = "課程代碼錯誤或重複選課 !";
-    } else {
-      $result_msg = "新增課程成功 !";
-    }
-    echo <<<EOF
-      <script>
-        $(document).ready(function () {
-            $(".toast#liveToast").toast('show');
-        });
-      </script>
-    EOF;
-}
+// if (isset($_POST['add'])) {
+//     $course_id = $_POST["course_id"];
+//     $query = "INSERT INTO selection (stu_id, course_id) VALUES ($stu_id, $course_id)";
+//     if (!$conn->query($query)) {
+//       $result_msg = "課程代碼錯誤或重複選課 !";
+//     } else {
+//       $result_msg = "新增課程成功 !";
+//     }
+//     echo <<<EOF
+//       <script>
+//         $(document).ready(function () {
+//             $(".toast#liveToast").toast('show');
+//         });
+//       </script>
+//     EOF;
+// }
 
-if (isset($_POST['del'])) {
-    $course_id = $_POST["course_id"];
-    $query = "DELETE FROM selection WHERE stu_id = $stu_id AND course_id = $course_id";
-    if (!$conn->query($query)) {
-      $result_msg = "課程代碼錯誤 !";
-    } else {
-      $result_msg = "刪除課程成功 !";
-    }
-    echo <<<EOF
+// if (isset($_POST['del'])) {
+//     $course_id = $_POST["course_id"];
+//     $query = "DELETE FROM selection WHERE stu_id = $stu_id AND course_id = $course_id";
+//     if (!$conn->query($query)) {
+//       $result_msg = "課程代碼錯誤 !";
+//     } else {
+//       $result_msg = "刪除課程成功 !";
+//     }
+//     echo <<<EOF
+//     <script>
+//       $(document).ready(function () {
+//           $(".toast#liveToast").toast('show');
+//       });
+//     </script>
+//     EOF;
+// }
+
+if (isset($msg)) {
+  echo <<<EOF
     <script>
       $(document).ready(function () {
           $(".toast#liveToast").toast('show');
       });
     </script>
-    EOF;
+  EOF;
 }
-echo <<<_END
-    <div class="card-body">
-      <form method="post" class="mb-3">
-        <div class="input-group input-group-lg">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fas fa-barcode mr-1"></i><b>課程代碼</b></span>
-          </div>
-          <input type="text" class="form-control" name="course_id" placeholder="請輸入課程代碼">
-          <div class="input-group-append">
-            <button class="btn primary-bgcolor border-dark" type="submit" name="add"><i
-                class="fas fa-plus mr-1"></i>新增課程</button>
-            <button class="btn primary-bgcolor border-dark" type="submit" name="del"><i
-                class="fas fa-trash-alt mr-1"></i>刪除課程</button>
-          </div>
-        </div>
-      </form>
 
-      <table class="table table-striped table-bordered table-hover">
-        <tbody>
-          <tr>
-            <th>課程代碼</th>
-            <th>課程名稱</th>
-            <th>學分數</th>
-          </tr>
-    _END;
+echo <<<_END
+  <div class="card-body">
+_END;
+
+// echo <<<_END
+//   <form method="post" class="mb-3">
+//       <div class="input-group input-group-lg">
+//         <div class="input-group-prepend">
+//           <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fas fa-barcode mr-1"></i><b>課程代碼</b></span>
+//         </div>
+//         <input type="text" class="form-control" name="course_id" placeholder="請輸入課程代碼">
+//         <div class="input-group-append">
+//           <button class="btn primary-bgcolor border-dark" type="submit" name="add"><i
+//               class="fas fa-plus mr-1"></i>新增課程</button>
+//           <button class="btn primary-bgcolor border-dark" type="submit" name="del"><i
+//               class="fas fa-trash-alt mr-1"></i>刪除課程</button>
+//         </div>
+//       </div>
+//     </form>
+// _END;
+
+echo <<<_END
+  <table class="table table-striped table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>課程代碼</th>
+        <th>課程名稱</th>
+        <th>學分數</th>
+        <th>加選</th>
+        <th>退選</th>
+      </tr>
+_END;
 
 $query = "SELECT * FROM course";
 $result = $conn->query($query);
@@ -199,7 +220,13 @@ for ($j = 0; $j < $rows; ++$j) {
     $r0 = htmlspecialchars($row["course_id"]);
     $r1 = htmlspecialchars($row["course_name"]);
     $r2 = htmlspecialchars($row["course_score"]);
-    echo "<tr><td>$r0</td><td>$r1</td><td>$r2</td></tr>";
+    echo "<tr>";
+    echo "<td>$r0</td>";
+    echo "<td>$r1</td>";
+    echo "<td>$r2</td>";
+    echo "<td><a href='add.php?stu_id=".$stu_id."&course_id=".$r0."'><button class='btn primary-bgcolor border-dark' type='button' name='add'>加選</button></a></td>";
+    echo "<td><a href='delete.php?stu_id=".$stu_id."&course_id=".$r0."'><button class='btn primary-bgcolor border-dark' type='button' name='del'>退選</button></a></td>";
+    echo "</tr>";
 }
 
 echo <<<_END
@@ -222,8 +249,8 @@ echo <<<EOF
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="toast-body" style="width: 200px;">
-            $result_msg
+        <div class="toast-body" style="width: 250px;">
+            $msg
         </div>
     </div>
   </div>
