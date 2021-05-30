@@ -115,7 +115,6 @@ if (isset($_POST['logout'])) {
 }
 
 if (isset($_POST['search'])) {
-    session_start();
     $_SESSION['stu_id'] = $stu_id;
     $_SESSION['cls_name'] = $cls_name;
     $_SESSION['cls_year'] = $cls_year;
@@ -237,7 +236,8 @@ echo <<<_END
 
 $result->close();
 $conn->close();
-echo <<<EOF
+if (isset($msg)){
+    echo <<<EOF
   <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
     <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true"
         data-delay="5000">
@@ -255,6 +255,8 @@ echo <<<EOF
     </div>
   </div>
 EOF;
+}
+
 ?>
   </body>
 </html>
